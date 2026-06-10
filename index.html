@@ -1,34 +1,312 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>accessero</title>
-
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-
-	<link href="https://fonts.googleapis.com/css?family=Reem+Kufi|Roboto:300" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/themes/red-white.css">
-	<!-- <link rel="stylesheet" href="css/themes/grey-white.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-grey.css"> -->
-	<!-- <link rel="stylesheet" href="css/themes/white-red.css"> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>accessero — Power, perfected.</title>
+  <meta name="description" content="accessero designs charging hardware with obsessive precision. GaN chargers, magnetic pads, woven cables and power banks — energy, engineered beautifully." />
+  <meta property="og:title" content="accessero — Power, perfected." />
+  <meta property="og:description" content="Charging hardware with obsessive precision." />
+  <meta property="og:image" content="assets/eclipse.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23ff2230' stroke-width='3.5'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
-	<main>
-		<div class="intro">accessero</div>
-		<div class="tagline">stay tuned for updates</div>   
-		<div class="tagline">
-      <a href="mailto:contact@accessero.com">contact@accessero.com</a>
+<body data-theme="dark">
+
+  <!-- ===== Loader ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__ring"></div>
+    <div class="loader__word">
+      <span>a</span><span>c</span><span>c</span><span>e</span><span>s</span><span>s</span><span>e</span><span>r</span><span>o</span>
     </div>
+    <div class="loader__bar"><i></i></div>
+  </div>
+
+  <!-- ===== Progress ===== -->
+  <div class="progress" aria-hidden="true"><i id="progressBar"></i></div>
+
+  <!-- ===== Nav ===== -->
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#top" aria-label="accessero home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" /></svg>
+      <span>accessero</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#craft">Craft</a>
+      <a href="#products">Products</a>
+      <a href="#design">Design</a>
+      <a href="#specs">Specs</a>
+    </nav>
+    <a class="nav__cta magnetic" href="#waitlist">
+      <span class="nav__cta-label">Pre-order</span>
+    </a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <i></i><i></i>
+    </button>
+  </header>
+
+  <!-- ===== Mobile menu ===== -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <nav class="menu__links" aria-label="Mobile">
+      <a href="#craft"><em>01</em>Craft</a>
+      <a href="#products"><em>02</em>Products</a>
+      <a href="#design"><em>03</em>Design</a>
+      <a href="#specs"><em>04</em>Specs</a>
+      <a href="#waitlist"><em>05</em>Pre-order</a>
+    </nav>
+    <p class="menu__foot">Energy, engineered beautifully.</p>
+  </div>
+
+  <main id="top">
+
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__media" data-parallax="-0.18">
+        <img src="assets/eclipse.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow" data-hero-line>
+          <span class="tick"></span>EST. 2026 — CHARGING, RECONSIDERED
+        </p>
+        <h1 class="hero__title" aria-label="Power, perfected.">
+          <span class="hero__row"><span data-hero-word>Power,</span></span>
+          <span class="hero__row hero__row--serif"><span data-hero-word><em>perfected.</em></span></span>
+        </h1>
+        <p class="hero__sub" data-hero-line>
+          accessero builds charging hardware the way watchmakers build movements —
+          obsessively, invisibly, beautifully.
+        </p>
+        <div class="hero__actions" data-hero-line>
+          <a class="btn btn--solid magnetic" href="#products"><span>Explore the line</span></a>
+          <a class="btn btn--ghost magnetic" href="#craft"><span>Our philosophy</span></a>
+        </div>
+      </div>
+
+      <div class="hero__meta" data-hero-line>
+        <span>240W&nbsp;GaN</span>
+        <span class="hero__scroll" aria-hidden="true"><i></i>SCROLL</span>
+        <span>00°&nbsp;HEAT</span>
+      </div>
+    </section>
+
+    <!-- ===== Marquee ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <span>240W GaN&ensp;✺&ensp;Zero coil whine&ensp;✺&ensp;Aerospace alloy&ensp;✺&ensp;Lifetime warranty&ensp;✺&ensp;Carbon neutral&ensp;✺&ensp;</span>
+        <span>240W GaN&ensp;✺&ensp;Zero coil whine&ensp;✺&ensp;Aerospace alloy&ensp;✺&ensp;Lifetime warranty&ensp;✺&ensp;Carbon neutral&ensp;✺&ensp;</span>
+      </div>
     </div>
-	</main>
+
+    <!-- ===== Craft / Manifesto ===== -->
+    <section class="craft" id="craft">
+      <div class="craft__bg" data-parallax="0.12" aria-hidden="true">
+        <img src="assets/speed-lighttrails.png" alt="" />
+      </div>
+      <div class="container">
+        <p class="kicker" data-reveal><span>01</span>THE CRAFT</p>
+        <h2 class="craft__statement" data-split>
+          Most chargers are an afterthought. Ours are the <em>main event</em> —
+          machined, measured, and tuned until electricity itself feels designed.
+        </h2>
+        <div class="craft__cols">
+          <div class="craft__col" data-reveal>
+            <h3>Gallium nitride core</h3>
+            <p>Half the size, twice the efficiency. Our fourth-generation GaN architecture moves 240 watts through a body smaller than a deck of cards.</p>
+          </div>
+          <div class="craft__col" data-reveal data-reveal-delay="1">
+            <h3>Thermal intelligence</h3>
+            <p>Sixteen onboard sensors sample temperature 1,000 times a second, shaping the current curve so your devices charge fast — and stay cold.</p>
+          </div>
+          <div class="craft__col" data-reveal data-reveal-delay="2">
+            <h3>Built for decades</h3>
+            <p>Unibody aluminum, replaceable cabling, firmware updates for life. We design products you keep, not products you replace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Feature: Arc ===== -->
+    <section class="feature">
+      <figure class="feature__media" data-reveal>
+        <div class="feature__img" data-parallax-img="0.16">
+          <img src="assets/light-arc.png" alt="A thin arc of red light over a dark curved surface — the Arc 240 charging signature" loading="lazy" />
+        </div>
+        <figcaption class="feature__badge" data-reveal data-reveal-delay="2">A·01</figcaption>
+      </figure>
+      <div class="feature__copy">
+        <p class="kicker" data-reveal><span>02</span>FLAGSHIP</p>
+        <h2 class="feature__title" data-split>The <em>Arc&nbsp;240</em></h2>
+        <p class="feature__lede" data-reveal>
+          One brick for everything you own. Laptop, phone, headphones — the Arc 240
+          reads each device and writes it a bespoke power profile in 40 milliseconds.
+        </p>
+        <ul class="feature__list">
+          <li data-reveal><b>240W</b><span>total output, four ports</span></li>
+          <li data-reveal data-reveal-delay="1"><b>40ms</b><span>device handshake</span></li>
+          <li data-reveal data-reveal-delay="2"><b>96%</b><span>conversion efficiency</span></li>
+        </ul>
+        <a class="btn btn--ghost magnetic" href="#waitlist" data-reveal><span>Reserve the Arc</span></a>
+      </div>
+    </section>
+
+    <!-- ===== Products ===== -->
+    <section class="products" id="products">
+      <div class="container">
+        <p class="kicker" data-reveal><span>03</span>THE LINE</p>
+        <h2 class="products__title" data-split>Four objects. <em>Every watt</em> you’ll ever need.</h2>
+      </div>
+      <div class="products__grid container">
+        <article class="card" data-reveal data-tilt>
+          <div class="card__media"><img src="assets/light-arc.png" alt="Arc 240 desktop GaN charger" loading="lazy" /></div>
+          <div class="card__body">
+            <header><h3>Arc 240</h3><span class="card__price">$149</span></header>
+            <p>Desktop GaN charger · 4 ports · 240W</p>
+          </div>
+          <span class="card__index">01</span>
+        </article>
+        <article class="card" data-reveal data-reveal-delay="1" data-tilt>
+          <div class="card__media"><img src="assets/concentric-waves.png" alt="Halo Pad magnetic wireless charger" loading="lazy" /></div>
+          <div class="card__body">
+            <header><h3>Halo Pad</h3><span class="card__price">$89</span></header>
+            <p>Magnetic wireless pad · Qi2 · 25W</p>
+          </div>
+          <span class="card__index">02</span>
+        </article>
+        <article class="card" data-reveal data-reveal-delay="2" data-tilt>
+          <div class="card__media"><img src="assets/cable-trails.png" alt="Tether woven charging cable" loading="lazy" /></div>
+          <div class="card__body">
+            <header><h3>Tether</h3><span class="card__price">$39</span></header>
+            <p>Woven USB-C cable · 240W · 2m</p>
+          </div>
+          <span class="card__index">03</span>
+        </article>
+        <article class="card" data-reveal data-reveal-delay="3" data-tilt>
+          <div class="card__media"><img src="assets/geometric-fold.png" alt="Slate power bank with angular folded design" loading="lazy" /></div>
+          <div class="card__body">
+            <header><h3>Slate</h3><span class="card__price">$119</span></header>
+            <p>Power bank · 10,000 mAh · 100W out</p>
+          </div>
+          <span class="card__index">04</span>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== Design (light act) ===== -->
+    <section class="design" id="design">
+      <div class="design__bg" data-parallax="0.1" aria-hidden="true">
+        <img src="assets/fabric-wave.png" alt="" loading="lazy" />
+      </div>
+      <div class="container design__inner">
+        <p class="kicker kicker--dark" data-reveal><span>04</span>THE DESIGN</p>
+        <h2 class="design__title" data-split>Loud performance. <em>Quiet objects.</em></h2>
+        <p class="design__lede" data-reveal>
+          Everything we ship is finished in two materials — bead-blasted aluminum and
+          recycled technical weave — so the whole line disappears into your desk,
+          your bag, your life.
+        </p>
+        <div class="design__panels">
+          <figure class="design__panel" data-reveal>
+            <div class="design__panel-img" data-parallax-img="0.12">
+              <img src="assets/concentric-waves.png" alt="Concentric machined ripples of the Halo Pad surface" loading="lazy" />
+            </div>
+            <figcaption>Halo Pad — machined ripple, 0.2&nbsp;mm relief</figcaption>
+          </figure>
+          <figure class="design__panel design__panel--tall" data-reveal data-reveal-delay="1">
+            <div class="design__panel-img" data-parallax-img="0.18">
+              <img src="assets/fabric-wave.png" alt="Soft folds of the recycled technical weave" loading="lazy" />
+            </div>
+            <figcaption>Technical weave — 100% recycled yarn</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Specs / Numbers ===== -->
+    <section class="specs" id="specs">
+      <div class="specs__bg" data-parallax="0.1" aria-hidden="true">
+        <img src="assets/flowing-surface.png" alt="" loading="lazy" />
+      </div>
+      <div class="container">
+        <p class="kicker" data-reveal><span>05</span>BY THE NUMBERS</p>
+        <div class="specs__grid">
+          <div class="spec" data-reveal>
+            <span class="spec__num"><b data-count="240">0</b>W</span>
+            <span class="spec__label">Peak output across the line</span>
+          </div>
+          <div class="spec" data-reveal data-reveal-delay="1">
+            <span class="spec__num"><b data-count="96">0</b>%</span>
+            <span class="spec__label">Energy conversion efficiency</span>
+          </div>
+          <div class="spec" data-reveal data-reveal-delay="2">
+            <span class="spec__num"><b data-count="16">0</b></span>
+            <span class="spec__label">Thermal sensors per device</span>
+          </div>
+          <div class="spec" data-reveal data-reveal-delay="3">
+            <span class="spec__num"><b data-count="0">0</b>dB</span>
+            <span class="spec__label">Coil whine. Ever.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta" id="waitlist">
+      <div class="cta__bg" data-parallax="-0.1" aria-hidden="true">
+        <img src="assets/cable-trails.png" alt="" loading="lazy" />
+      </div>
+      <div class="container cta__inner">
+        <h2 class="cta__title" data-split>Be first <em>in line.</em></h2>
+        <p class="cta__sub" data-reveal>The first production run ships this winter. 5,000 units, numbered.</p>
+        <form class="cta__form" data-reveal onsubmit="return false">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@example.com" required />
+          <button class="btn btn--solid magnetic" type="submit"><span>Join the waitlist</span></button>
+        </form>
+        <p class="cta__fine" data-reveal>No spam. One email when pre-orders open.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container footer__top">
+      <div class="footer__col">
+        <h4>Products</h4>
+        <a href="#products">Arc 240</a>
+        <a href="#products">Halo Pad</a>
+        <a href="#products">Tether</a>
+        <a href="#products">Slate</a>
+      </div>
+      <div class="footer__col">
+        <h4>Company</h4>
+        <a href="#craft">Philosophy</a>
+        <a href="#design">Design</a>
+        <a href="#specs">Engineering</a>
+      </div>
+      <div class="footer__col">
+        <h4>Elsewhere</h4>
+        <a href="#top">Instagram</a>
+        <a href="#top">X / Twitter</a>
+        <a href="#top">YouTube</a>
+      </div>
+      <div class="footer__col footer__col--note">
+        <h4>HQ</h4>
+        <p>Columbus, Ohio<br />Designed on Earth.<br />Charged everywhere.</p>
+      </div>
+    </div>
+    <div class="footer__wordmark" aria-hidden="true" data-parallax-img="0.06">accessero</div>
+    <div class="container footer__bottom">
+      <span>© 2026 accessero. A fictional brand, beautifully charged.</span>
+      <a href="#top" class="footer__up">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
 </body>
 </html>
