@@ -179,17 +179,24 @@
   /* ---------- Magnetic buttons (fine pointers only) ---------- */
   if (isFinePointer && !prefersReduced) {
     document.querySelectorAll(".magnetic").forEach((el) => {
-      const strength = 0.32;
+      const strength = 0.22;
+      // Cache the rect on enter: reading it on every move creates a feedback
+      // loop (the transform shifts the rect, which shifts the transform).
+      let rect = null;
+      el.addEventListener("mouseenter", () => {
+        rect = el.getBoundingClientRect();
+        el.style.transition = "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)";
+      });
       el.addEventListener("mousemove", (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) * strength;
-        const y = (e.clientY - r.top - r.height / 2) * strength;
+        if (!rect) return;
+        const x = (e.clientX - rect.left - rect.width / 2) * strength;
+        const y = (e.clientY - rect.top - rect.height / 2) * strength;
         el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
       });
       el.addEventListener("mouseleave", () => {
+        rect = null;
         el.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
         el.style.transform = "";
-        setTimeout(() => (el.style.transition = ""), 500);
       });
     });
   }
@@ -197,14 +204,17 @@
   /* ---------- Card tilt (fine pointers only) ---------- */
   if (isFinePointer && !prefersReduced) {
     document.querySelectorAll("[data-tilt]").forEach((card) => {
+      let r = null;
+      card.addEventListener("mouseenter", () => (r = card.getBoundingClientRect()));
       card.addEventListener("mousemove", (e) => {
-        const r = card.getBoundingClientRect();
+        if (!r) return;
         const px = (e.clientX - r.left) / r.width - 0.5;
         const py = (e.clientY - r.top) / r.height - 0.5;
         card.style.transform =
           `perspective(900px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 5).toFixed(2)}deg) translateZ(0)`;
       });
       card.addEventListener("mouseleave", () => {
+        r = null;
         card.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
         card.style.transform = "";
         setTimeout(() => (card.style.transition = ""), 600);
@@ -221,7 +231,7 @@
       if (!input.value || !input.checkValidity()) return;
       btn.textContent = "You’re on the list ✓";
       input.value = "";
-      input.placeholder = "See you this winter.";
+      input.placeholder = "Talk soon.";
       setTimeout(() => (btn.textContent = "Join the waitlist"), 4000);
     });
   }

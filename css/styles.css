@@ -602,7 +602,7 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   background: linear-gradient(180deg, rgba(255,34,48,0.55), rgba(255,34,48,0.02));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
-  user-select: none; will-change: transform;
+  user-select: none; pointer-events: none; will-change: transform;
 }
 .footer__bottom {
   display: flex; justify-content: space-between; align-items: center; gap: 1rem;
