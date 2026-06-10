@@ -201,24 +201,61 @@
     });
   }
 
-  /* ---------- Card tilt (fine pointers only) ---------- */
+  /* ---------- Scenes: list rows swap the section backdrop ---------- */
+  const sceneRows = [...document.querySelectorAll("[data-scene]")];
+  const sceneBgs = [...document.querySelectorAll("[data-scene-bg]")];
+  if (sceneRows.length) {
+    const setScene = (name) => {
+      sceneRows.forEach((row) => row.classList.toggle("is-active", row.dataset.scene === name));
+      sceneBgs.forEach((bg) => bg.classList.toggle("is-active", bg.dataset.sceneBg === name));
+    };
+    sceneRows.forEach((row) => {
+      row.addEventListener("mouseenter", () => setScene(row.dataset.scene));
+      row.addEventListener("focusin", () => setScene(row.dataset.scene));
+      row.addEventListener("click", () => setScene(row.dataset.scene));
+    });
+    if (!isFinePointer) {
+      // No hover on touch: activate the row passing through mid-viewport.
+      const sceneIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setScene(entry.target.dataset.scene);
+          });
+        },
+        { rootMargin: "-42% 0px -42% 0px", threshold: 0 }
+      );
+      sceneRows.forEach((row) => sceneIO.observe(row));
+    }
+  }
+
+  /* ---------- Cursor accent (fine pointers only) ---------- */
   if (isFinePointer && !prefersReduced) {
-    document.querySelectorAll("[data-tilt]").forEach((card) => {
-      let r = null;
-      card.addEventListener("mouseenter", () => (r = card.getBoundingClientRect()));
-      card.addEventListener("mousemove", (e) => {
-        if (!r) return;
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform =
-          `perspective(900px) rotateX(${(-py * 5).toFixed(2)}deg) rotateY(${(px * 5).toFixed(2)}deg) translateZ(0)`;
-      });
-      card.addEventListener("mouseleave", () => {
-        r = null;
-        card.style.transition = "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)";
-        card.style.transform = "";
-        setTimeout(() => (card.style.transition = ""), 600);
-      });
+    const dot = document.createElement("div");
+    dot.className = "cursor";
+    document.body.appendChild(dot);
+    let tx = -100, ty = -100, cx = -100, cy = -100, visible = false;
+    window.addEventListener("mousemove", (e) => {
+      tx = e.clientX;
+      ty = e.clientY;
+      if (!visible) {
+        visible = true;
+        dot.style.opacity = "1";
+      }
+    }, { passive: true });
+    document.documentElement.addEventListener("mouseleave", () => {
+      visible = false;
+      dot.style.opacity = "0";
+    });
+    const trail = () => {
+      cx += (tx - cx) * 0.22;
+      cy += (ty - cy) * 0.22;
+      dot.style.transform = `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px)`;
+      requestAnimationFrame(trail);
+    };
+    requestAnimationFrame(trail);
+    document.querySelectorAll("a, button, .scene, input").forEach((el) => {
+      el.addEventListener("mouseenter", () => dot.classList.add("is-on"));
+      el.addEventListener("mouseleave", () => dot.classList.remove("is-on"));
     });
   }
 
