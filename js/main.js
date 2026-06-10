@@ -214,17 +214,33 @@
       row.addEventListener("focusin", () => setScene(row.dataset.scene));
       row.addEventListener("click", () => setScene(row.dataset.scene));
     });
-    if (!isFinePointer) {
-      // No hover on touch: activate the row passing through mid-viewport.
-      const sceneIO = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) setScene(entry.target.dataset.scene);
-          });
-        },
-        { rootMargin: "-42% 0px -42% 0px", threshold: 0 }
-      );
-      sceneRows.forEach((row) => sceneIO.observe(row));
+    if (!isFinePointer && !prefersReduced) {
+      // No hover on touch: run the scenes as a slow rotation while the
+      // section is on screen. A tap picks a scene and restarts the clock.
+      let idx = 0;
+      let timer = null;
+      const start = () => {
+        if (timer) return;
+        timer = setInterval(() => {
+          idx = (idx + 1) % sceneRows.length;
+          setScene(sceneRows[idx].dataset.scene);
+        }, 3400);
+      };
+      const stop = () => {
+        clearInterval(timer);
+        timer = null;
+      };
+      new IntersectionObserver(
+        (entries) => entries.forEach((e) => (e.isIntersecting ? start() : stop())),
+        { threshold: 0.3 }
+      ).observe(document.querySelector(".scenes"));
+      sceneRows.forEach((row, i) => {
+        row.addEventListener("click", () => {
+          idx = i;
+          stop();
+          start();
+        });
+      });
     }
   }
 
@@ -253,10 +269,11 @@
       requestAnimationFrame(trail);
     };
     requestAnimationFrame(trail);
-    document.querySelectorAll("a, button, .scene, input").forEach((el) => {
-      el.addEventListener("mouseenter", () => dot.classList.add("is-on"));
-      el.addEventListener("mouseleave", () => dot.classList.remove("is-on"));
-    });
+    // Delegate hover state from the document: per-element enter/leave
+    // listeners fire in rapid bursts across dense areas like the nav.
+    document.addEventListener("mouseover", (e) => {
+      dot.classList.toggle("is-on", !!e.target.closest("a, button, input, .scene"));
+    }, { passive: true });
   }
 
   /* ---------- Waitlist form ---------- */
