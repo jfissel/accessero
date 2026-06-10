@@ -43,7 +43,19 @@
           });
           node.replaceChild(frag, child);
         } else if (child.nodeType === Node.ELEMENT_NODE) {
-          walk(child);
+          if (child.tagName === "EM") {
+            // Keep ems whole: their background-clip:text gradients go
+            // invisible when the text sits inside transformed descendants,
+            // so the em reveals as a single unit instead of per word.
+            const w = document.createElement("span");
+            w.className = "w";
+            const inner = document.createElement("i");
+            node.replaceChild(w, child);
+            w.appendChild(inner);
+            inner.appendChild(child);
+          } else {
+            walk(child);
+          }
         }
       });
     };
@@ -255,6 +267,11 @@
       ty = e.clientY;
       if (!visible) {
         visible = true;
+        // Snap to the pointer on (re)entry — otherwise the dot glides in
+        // from wherever it was when the pointer last left the viewport.
+        cx = tx;
+        cy = ty;
+        dot.style.transform = `translate(${cx}px, ${cy}px)`;
         dot.style.opacity = "1";
       }
     }, { passive: true });
