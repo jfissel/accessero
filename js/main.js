@@ -178,9 +178,12 @@
     menuOpen = open;
     menu.classList.toggle("is-open", open);
     menu.setAttribute("aria-hidden", String(!open));
+    menu.inert = !open;
     burger.setAttribute("aria-expanded", String(open));
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     document.body.style.overflow = open ? "hidden" : "";
+    if (open) menu.querySelector("a").focus({ preventScroll: true });
+    else if (menu.contains(document.activeElement)) burger.focus({ preventScroll: true });
   };
   burger.addEventListener("click", () => setMenu(!menuOpen));
   menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
@@ -218,13 +221,23 @@
   const sceneBgs = [...document.querySelectorAll("[data-scene-bg]")];
   if (sceneRows.length) {
     const setScene = (name) => {
-      sceneRows.forEach((row) => row.classList.toggle("is-active", row.dataset.scene === name));
+      sceneRows.forEach((row) => {
+        const active = row.dataset.scene === name;
+        row.classList.toggle("is-active", active);
+        row.setAttribute("aria-pressed", String(active));
+      });
       sceneBgs.forEach((bg) => bg.classList.toggle("is-active", bg.dataset.sceneBg === name));
     };
     sceneRows.forEach((row) => {
       row.addEventListener("mouseenter", () => setScene(row.dataset.scene));
       row.addEventListener("focusin", () => setScene(row.dataset.scene));
       row.addEventListener("click", () => setScene(row.dataset.scene));
+      row.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setScene(row.dataset.scene);
+        }
+      });
     });
     if (!isFinePointer && !prefersReduced) {
       // No hover on touch: run the scenes as a slow rotation while the
@@ -259,11 +272,14 @@
   /* ---------- Waitlist form ---------- */
   const form = document.querySelector(".cta__form");
   if (form) {
-    form.addEventListener("submit", () => {
+    const status = document.getElementById("formStatus");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
       const btn = form.querySelector("button span");
       const input = form.querySelector("input");
       if (!input.value || !input.checkValidity()) return;
       btn.textContent = "You’re on the list ✓";
+      if (status) status.textContent = "You’re on the waitlist. Talk soon.";
       input.value = "";
       input.placeholder = "Talk soon.";
       setTimeout(() => (btn.textContent = "Join the waitlist"), 4000);

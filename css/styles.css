@@ -3,6 +3,80 @@
    Acts: dark (hero/craft/products) → light (design) → dark (specs/cta)
    ============================================================ */
 
+/* ============ Self-hosted fonts (latin subsets, Google Fonts builds) ============ */
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-serif-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-300.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-500.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-700.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-800.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter Tight";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("../assets/fonts/inter-tight-900.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/jetbrains-mono-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   --black: #070405;
   --ink: #0d0809;
@@ -43,6 +117,9 @@ body {
 }
 
 img { display: block; max-width: 100%; }
+/* <picture> wrappers must not introduce a box: every backdrop img is
+   sized 100%/absolutely against its section container. */
+picture { display: contents; }
 a { color: inherit; text-decoration: none; }
 em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 
@@ -52,6 +129,18 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   position: absolute; width: 1px; height: 1px;
   clip-path: inset(50%); overflow: hidden; white-space: nowrap;
 }
+
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; }
+
+.skip-link {
+  position: fixed; top: 0.75rem; left: 0.75rem; z-index: 200;
+  padding: 0.7rem 1.2rem; border-radius: 99px;
+  background: var(--black); color: var(--white);
+  border: 1px solid var(--red);
+  font-size: 0.85rem; font-weight: 500;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
 
 ::selection { background: var(--red); color: var(--white); }
 
@@ -515,7 +604,7 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   align-items: baseline; gap: clamp(1rem, 2.5vw, 2.5rem);
   padding-block: clamp(1.2rem, 2.8vh, 1.9rem);
   border-top: 1px solid var(--line);
-  cursor: pointer; outline: none;
+  cursor: pointer;
   transition: opacity 0.45s, padding-left 0.55s var(--ease-out);
 }
 .scenes__list .scene:last-child { border-bottom: 1px solid var(--line); }
@@ -673,7 +762,6 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   padding: 1rem 1.5rem; border-radius: 99px;
   background: rgba(255,255,255,0.06); border: 1px solid var(--line);
   color: var(--white); font-family: var(--font-display); font-size: 0.95rem;
-  outline: none;
   transition: border-color 0.3s, background 0.3s;
 }
 .cta__form input::placeholder { color: var(--grey); }

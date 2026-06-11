@@ -5,16 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>accessero — Power, perfected.</title>
   <meta name="description" content="accessero is building the future of charging — gallium nitride that runs cold, power that thinks, sustainable materials, and energy that fits every setup. Join the waitlist." />
+  <meta name="theme-color" content="#070405" />
+  <link rel="canonical" href="https://accessero.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="accessero" />
+  <meta property="og:url" content="https://accessero.com/" />
   <meta property="og:title" content="accessero — Power, perfected." />
   <meta property="og:description" content="The future of charging is coming. Be first to know." />
-  <meta property="og:image" content="assets/eclipse.png" />
+  <meta property="og:image" content="https://accessero.com/assets/eclipse.png" />
+  <meta property="og:image:width" content="1774" />
+  <meta property="og:image:height" content="887" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="accessero — Power, perfected." />
+  <meta name="twitter:description" content="The future of charging is coming. Be first to know." />
+  <meta name="twitter:image" content="https://accessero.com/assets/eclipse.png" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%23ff2230' stroke-width='3.5'/%3E%3C/svg%3E" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <link rel="preload" as="image" href="assets/eclipse.avif" type="image/avif" fetchpriority="high" />
+  <link rel="preload" as="font" href="assets/fonts/inter-tight-800.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/inter-tight-900.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/instrument-serif-400-italic.woff2" type="font/woff2" crossorigin />
+  <link rel="preload" as="font" href="assets/fonts/jetbrains-mono-400.woff2" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body data-theme="dark">
+
+  <a class="skip-link" href="#top">Skip to content</a>
 
   <!-- ===== Loader ===== -->
   <div class="loader" id="loader" aria-hidden="true">
@@ -53,7 +69,7 @@
   </header>
 
   <!-- ===== Mobile menu ===== -->
-  <div class="menu" id="menu" aria-hidden="true">
+  <div class="menu" id="menu" aria-hidden="true" inert>
     <nav class="menu__links" aria-label="Mobile">
       <a href="#craft"><em>01</em>Idea</a>
       <a href="#tech"><em>02</em>Technology</a>
@@ -70,7 +86,10 @@
     <!-- ===== Hero ===== -->
     <section class="hero" id="hero">
       <div class="hero__media" data-parallax="-0.18">
-        <img src="assets/eclipse.png" alt="" aria-hidden="true" />
+        <picture>
+          <source srcset="assets/eclipse.avif" type="image/avif" />
+          <img src="assets/eclipse.png" alt="" width="1774" height="887" fetchpriority="high" decoding="async" aria-hidden="true" />
+        </picture>
       </div>
       <div class="hero__leak" aria-hidden="true"></div>
       <div class="hero__vignette" aria-hidden="true"></div>
@@ -139,7 +158,10 @@
     <!-- ===== Technology (full-bleed act) ===== -->
     <section class="tech" id="tech">
       <div class="tech__bg" data-parallax="-0.1" aria-hidden="true">
-        <img src="assets/light-arc.png" alt="" loading="lazy" />
+        <picture>
+          <source srcset="assets/light-arc.avif" type="image/avif" />
+          <img src="assets/light-arc.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="tech__scrim" aria-hidden="true"></div>
       <div class="container tech__inner">
@@ -171,37 +193,49 @@
     <!-- ===== Scenes (hover/scroll switches the backdrop) ===== -->
     <section class="scenes" id="products">
       <div class="scenes__bgs" aria-hidden="true">
-        <img class="is-active" data-scene-bg="desk" src="assets/concentric-waves.png" alt="" loading="lazy" />
-        <img data-scene-bg="home" src="assets/flowing-surface.png" alt="" loading="lazy" />
-        <img data-scene-bg="studio" src="assets/cable-trails.png" alt="" loading="lazy" />
-        <img data-scene-bg="road" src="assets/speed-lighttrails.png" alt="" loading="lazy" />
+        <picture>
+          <source srcset="assets/concentric-waves.avif" type="image/avif" />
+          <img class="is-active" data-scene-bg="desk" src="assets/concentric-waves.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
+        <picture>
+          <source srcset="assets/flowing-surface.avif" type="image/avif" />
+          <img data-scene-bg="home" src="assets/flowing-surface.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
+        <picture>
+          <source srcset="assets/cable-trails.avif" type="image/avif" />
+          <img data-scene-bg="studio" src="assets/cable-trails.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
+        <picture>
+          <source srcset="assets/speed-lighttrails.avif" type="image/avif" />
+          <img data-scene-bg="road" src="assets/speed-lighttrails.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="scenes__scrim" aria-hidden="true"></div>
       <div class="container scenes__inner">
         <p class="kicker" data-reveal><span>03</span>WHERE IT FITS</p>
         <h2 class="scenes__title" data-split>One idea. <em>Every setup.</em></h2>
         <ul class="scenes__list">
-          <li class="scene is-active" data-scene="desk" tabindex="0" data-reveal>
+          <li class="scene is-active" data-scene="desk" tabindex="0" role="button" aria-pressed="true" data-reveal>
             <span class="scene__idx">01</span>
-            <h3 class="scene__name">The desk</h3>
+            <span class="scene__name">The desk</span>
             <p class="scene__line">Your whole setup powered from a single point — no brick farm, no cable spaghetti.</p>
             <span class="scene__tag">INVISIBLE</span>
           </li>
-          <li class="scene" data-scene="home" tabindex="0" data-reveal data-reveal-delay="1">
+          <li class="scene" data-scene="home" tabindex="0" role="button" aria-pressed="false" data-reveal data-reveal-delay="1">
             <span class="scene__idx">02</span>
-            <h3 class="scene__name">The home</h3>
+            <span class="scene__name">The home</span>
             <p class="scene__line">Energy that blends into the room and tops up the whole family — quietly, safely, always.</p>
             <span class="scene__tag">AMBIENT</span>
           </li>
-          <li class="scene" data-scene="studio" tabindex="0" data-reveal data-reveal-delay="2">
+          <li class="scene" data-scene="studio" tabindex="0" role="button" aria-pressed="false" data-reveal data-reveal-delay="2">
             <span class="scene__idx">03</span>
-            <h3 class="scene__name">The studio</h3>
+            <span class="scene__name">The studio</span>
             <p class="scene__line">Cameras, rigs, laptops, lights. Demanding setups deserve power that never blinks.</p>
             <span class="scene__tag">RELENTLESS</span>
           </li>
-          <li class="scene" data-scene="road" tabindex="0" data-reveal data-reveal-delay="3">
+          <li class="scene" data-scene="road" tabindex="0" role="button" aria-pressed="false" data-reveal data-reveal-delay="3">
             <span class="scene__idx">04</span>
-            <h3 class="scene__name">The road</h3>
+            <span class="scene__name">The road</span>
             <p class="scene__line">A full day of energy folded into a side pocket. Airports, trains, summits, nowhere.</p>
             <span class="scene__tag">WEIGHTLESS</span>
           </li>
@@ -212,7 +246,10 @@
     <!-- ===== Design (light act) ===== -->
     <section class="design" id="design">
       <div class="design__bg" data-parallax="0.1" aria-hidden="true">
-        <img src="assets/fabric-wave.png" alt="" loading="lazy" />
+        <picture>
+          <source srcset="assets/fabric-wave.avif" type="image/avif" />
+          <img src="assets/fabric-wave.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="container design__inner">
         <p class="kicker kicker--dark" data-reveal><span>04</span>THE PRINCIPLES</p>
@@ -252,7 +289,10 @@
     <!-- ===== Specs / Numbers ===== -->
     <section class="specs" id="specs">
       <div class="specs__bg" data-parallax="0.1" aria-hidden="true">
-        <img src="assets/geometric-fold.png" alt="" loading="lazy" />
+        <picture>
+          <source srcset="assets/geometric-fold.avif" type="image/avif" />
+          <img src="assets/geometric-fold.png" alt="" width="1774" height="887" loading="lazy" decoding="async" />
+        </picture>
       </div>
       <div class="container">
         <p class="kicker" data-reveal><span>05</span>BY THE NUMBERS</p>
@@ -282,11 +322,12 @@
       <div class="container cta__inner">
         <h2 class="cta__title" data-split>The future <em>is charging.</em></h2>
         <p class="cta__sub" data-reveal>Watch it arrive. The waitlist sees everything before anyone else.</p>
-        <form class="cta__form" data-reveal onsubmit="return false">
+        <form class="cta__form" data-reveal>
           <label class="sr-only" for="email">Email address</label>
-          <input id="email" type="email" placeholder="you@example.com" required />
+          <input id="email" type="email" autocomplete="email" placeholder="you@example.com" required />
           <button class="btn btn--solid" type="submit"><span>Join the waitlist</span></button>
         </form>
+        <p class="sr-only" role="status" id="formStatus"></p>
         <p class="cta__fine" data-reveal>No spam. One email when the silence breaks.</p>
       </div>
     </section>
