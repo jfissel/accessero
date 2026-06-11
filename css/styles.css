@@ -422,8 +422,9 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 }
 .hero__row {
   display: block; overflow: hidden;
-  /* generous side padding: the italic serif "p" overhangs left of its box */
-  padding: 0.14em 0.14em; margin: -0.14em -0.14em;
+  /* generous side padding: the italic serif "p" overhangs left of its box;
+     its descender tail needs ~0.3em on the left */
+  padding: 0.14em 0.14em 0.14em 0.3em; margin: -0.14em -0.14em -0.14em -0.3em;
 }
 .hero__row > span { display: inline-block; }
 .hero__row--serif em {
@@ -431,6 +432,9 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   background: linear-gradient(100deg, var(--white) 35%, var(--red-soft) 70%, var(--red-bright));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
+  /* background-clip:text only paints ink inside the box — pad it so the
+     "p" descender's left foot still gets the gradient */
+  padding: 0.15em 0.15em 0.15em 0.3em; margin: -0.15em -0.15em -0.15em -0.3em;
 }
 .hero__sub {
   max-width: 38ch; margin-top: clamp(1.2rem, 3vh, 2rem);
