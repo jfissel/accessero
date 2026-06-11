@@ -119,20 +119,6 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   100% { transform: translate(30px, 36px); }
 }
 
-/* ============ Custom cursor accent ============ */
-.cursor {
-  position: fixed; top: -6px; left: -6px; z-index: 85;
-  width: 12px; height: 12px; border-radius: 50%;
-  background: var(--red);
-  pointer-events: none; opacity: 0;
-  transition: opacity 0.4s, scale 0.25s var(--ease-out), background 0.25s;
-  will-change: transform;
-}
-.cursor.is-on {
-  scale: 2.6;
-  background: rgba(255, 34, 48, 0.25);
-}
-
 /* ============ Progress ============ */
 .progress {
   position: fixed; top: 0; left: 0; right: 0; height: 2px;
@@ -277,7 +263,6 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 }
 .btn--ghost:hover { border-color: var(--red); }
 .btn--ghost:hover::before { transform: none; }
-.magnetic { will-change: transform; }
 
 /* ============ Kicker ============ */
 .kicker {
@@ -341,12 +326,13 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 }
 .hero__row {
   display: block; overflow: hidden;
-  padding: 0.12em 0.06em; margin: -0.12em -0.06em;
+  /* generous side padding: the italic serif "p" overhangs left of its box */
+  padding: 0.14em 0.14em; margin: -0.14em -0.14em;
 }
 .hero__row > span { display: inline-block; }
 .hero__row--serif em {
   font-weight: 400; letter-spacing: -0.02em;
-  background: linear-gradient(100deg, var(--white) 30%, var(--red) 75%, var(--red-deep));
+  background: linear-gradient(100deg, var(--white) 35%, #ffb0b5 70%, #ff5a64);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
 }
@@ -399,7 +385,7 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   text-transform: uppercase; color: var(--grey);
   animation: marquee 28s linear infinite;
 }
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { to { transform: translateX(-25%); } }
 
 /* ============ Craft ============ */
 .craft {
@@ -498,8 +484,8 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
 .scenes__scrim {
   position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, var(--black) 0%, rgba(7,4,5,0.55) 22%, rgba(7,4,5,0.55) 78%, var(--black) 100%),
-    linear-gradient(90deg, rgba(7,4,5,0.6), transparent 60%);
+    linear-gradient(180deg, var(--black) 0%, rgba(7,4,5,0.72) 22%, rgba(7,4,5,0.72) 78%, var(--black) 100%),
+    linear-gradient(90deg, rgba(7,4,5,0.78), rgba(7,4,5,0.2) 60%);
 }
 .scenes__inner { position: relative; z-index: 2; }
 .scenes__title {
@@ -639,17 +625,22 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
     radial-gradient(110% 100% at 50% 50%, transparent 35%, rgba(7, 4, 5, 0.9) 100%);
   pointer-events: none;
 }
-/* eclipse echo — the loader ring returns behind the closing line */
+/* eclipse echo — the loader ring returns behind the closing line.
+   Kept small enough that the glow never reaches the section's clip edge. */
 .cta::after {
   content: ""; position: absolute; z-index: 1;
   top: 50%; left: 50%;
-  width: min(70vw, 640px); aspect-ratio: 1;
+  width: min(56vw, 520px); aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   border: 1px solid rgba(255, 34, 48, 0.28);
-  box-shadow: 0 0 90px rgba(255, 34, 48, 0.2), inset 0 0 80px rgba(255, 34, 48, 0.09);
+  box-shadow: 0 0 60px rgba(255, 34, 48, 0.18), inset 0 0 60px rgba(255, 34, 48, 0.09);
   pointer-events: none;
-  animation: loaderRing 3.4s var(--ease-in-out) infinite alternate;
+  animation: ctaPulse 3.4s var(--ease-in-out) infinite alternate;
+}
+@keyframes ctaPulse {
+  from { transform: translate(-50%, -50%) scale(0.97); opacity: 0.6; }
+  to   { transform: translate(-50%, -50%) scale(1.02); opacity: 1; }
 }
 .cta__inner { position: relative; z-index: 2; }
 .cta__title {
@@ -776,7 +767,6 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   .cta__form input { text-align: center; }
   .btn:active { transform: scale(0.96); transition-duration: 0.15s; }
   .scene:active .scene__name { color: var(--white); }
-  .cursor { display: none; }
 }
 
 @media (max-width: 480px) {

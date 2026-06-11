@@ -188,31 +188,6 @@
     if (e.key === "Escape" && menuOpen) setMenu(false);
   });
 
-  /* ---------- Magnetic buttons (fine pointers only) ---------- */
-  if (isFinePointer && !prefersReduced) {
-    document.querySelectorAll(".magnetic").forEach((el) => {
-      const strength = 0.22;
-      // Cache the rect on enter: reading it on every move creates a feedback
-      // loop (the transform shifts the rect, which shifts the transform).
-      let rect = null;
-      el.addEventListener("mouseenter", () => {
-        rect = el.getBoundingClientRect();
-        el.style.transition = "transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)";
-      });
-      el.addEventListener("mousemove", (e) => {
-        if (!rect) return;
-        const x = (e.clientX - rect.left - rect.width / 2) * strength;
-        const y = (e.clientY - rect.top - rect.height / 2) * strength;
-        el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
-      });
-      el.addEventListener("mouseleave", () => {
-        rect = null;
-        el.style.transition = "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)";
-        el.style.transform = "";
-      });
-    });
-  }
-
   /* ---------- Scenes: list rows swap the section backdrop ---------- */
   const sceneRows = [...document.querySelectorAll("[data-scene]")];
   const sceneBgs = [...document.querySelectorAll("[data-scene-bg]")];
@@ -254,43 +229,6 @@
         });
       });
     }
-  }
-
-  /* ---------- Cursor accent (fine pointers only) ---------- */
-  if (isFinePointer && !prefersReduced) {
-    const dot = document.createElement("div");
-    dot.className = "cursor";
-    document.body.appendChild(dot);
-    let tx = -100, ty = -100, cx = -100, cy = -100, visible = false;
-    window.addEventListener("mousemove", (e) => {
-      tx = e.clientX;
-      ty = e.clientY;
-      if (!visible) {
-        visible = true;
-        // Snap to the pointer on (re)entry — otherwise the dot glides in
-        // from wherever it was when the pointer last left the viewport.
-        cx = tx;
-        cy = ty;
-        dot.style.transform = `translate(${cx}px, ${cy}px)`;
-        dot.style.opacity = "1";
-      }
-    }, { passive: true });
-    document.documentElement.addEventListener("mouseleave", () => {
-      visible = false;
-      dot.style.opacity = "0";
-    });
-    const trail = () => {
-      cx += (tx - cx) * 0.22;
-      cy += (ty - cy) * 0.22;
-      dot.style.transform = `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px)`;
-      requestAnimationFrame(trail);
-    };
-    requestAnimationFrame(trail);
-    // Delegate hover state from the document: per-element enter/leave
-    // listeners fire in rapid bursts across dense areas like the nav.
-    document.addEventListener("mouseover", (e) => {
-      dot.classList.toggle("is-on", !!e.target.closest("a, button, input, .scene"));
-    }, { passive: true });
   }
 
   /* ---------- Waitlist form ---------- */

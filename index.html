@@ -38,12 +38,12 @@
       <span>accessero</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#craft">The idea</a>
-      <a href="#products">Every setup</a>
+      <a href="#craft">Idea</a>
+      <a href="#tech">Technology</a>
       <a href="#design">Principles</a>
       <a href="#specs">Numbers</a>
     </nav>
-    <a class="nav__cta magnetic" href="#waitlist">
+    <a class="nav__cta" href="#waitlist">
       <span class="nav__cta-label">Get notified</span>
     </a>
     <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
@@ -54,8 +54,8 @@
   <!-- ===== Mobile menu ===== -->
   <div class="menu" id="menu" aria-hidden="true">
     <nav class="menu__links" aria-label="Mobile">
-      <a href="#craft"><em>01</em>The idea</a>
-      <a href="#products"><em>02</em>Every setup</a>
+      <a href="#craft"><em>01</em>Idea</a>
+      <a href="#tech"><em>02</em>Technology</a>
       <a href="#design"><em>03</em>Principles</a>
       <a href="#specs"><em>04</em>Numbers</a>
       <a href="#waitlist"><em>05</em>Get notified</a>
@@ -87,8 +87,8 @@
           and everywhere you are.
         </p>
         <div class="hero__actions" data-hero-line>
-          <a class="btn btn--solid magnetic" href="#waitlist"><span>Get notified</span></a>
-          <a class="btn btn--ghost magnetic" href="#craft"><span>Why we exist</span></a>
+          <a class="btn btn--solid" href="#waitlist"><span>Get notified</span></a>
+          <a class="btn btn--ghost" href="#craft"><span>Why we exist</span></a>
         </div>
       </div>
 
@@ -101,7 +101,11 @@
 
     <!-- ===== Marquee ===== -->
     <div class="marquee" aria-hidden="true">
+      <!-- 4 copies + a -25% loop: the track always overfills the viewport,
+           so wide screens never see a gap before the animation wraps. -->
       <div class="marquee__track" data-marquee>
+        <span>The future is charging&ensp;✺&ensp;Gallium nitride, zero heat&ensp;✺&ensp;Power that thinks&ensp;✺&ensp;100% recycled materials&ensp;✺&ensp;Every device, every setup&ensp;✺&ensp;</span>
+        <span>The future is charging&ensp;✺&ensp;Gallium nitride, zero heat&ensp;✺&ensp;Power that thinks&ensp;✺&ensp;100% recycled materials&ensp;✺&ensp;Every device, every setup&ensp;✺&ensp;</span>
         <span>The future is charging&ensp;✺&ensp;Gallium nitride, zero heat&ensp;✺&ensp;Power that thinks&ensp;✺&ensp;100% recycled materials&ensp;✺&ensp;Every device, every setup&ensp;✺&ensp;</span>
         <span>The future is charging&ensp;✺&ensp;Gallium nitride, zero heat&ensp;✺&ensp;Power that thinks&ensp;✺&ensp;100% recycled materials&ensp;✺&ensp;Every device, every setup&ensp;✺&ensp;</span>
       </div>
@@ -146,7 +150,7 @@
           a bespoke charging curve, and keeps your battery healthy for years —
           without you ever thinking about it. That’s what we’re building.
         </p>
-        <a class="btn btn--ghost magnetic" href="#waitlist" data-reveal><span>Follow the build</span></a>
+        <a class="btn btn--ghost" href="#waitlist" data-reveal><span>Follow the build</span></a>
       </div>
       <div class="container tech__stats" data-reveal>
         <div class="tech__stat">
@@ -281,7 +285,7 @@
         <form class="cta__form" data-reveal onsubmit="return false">
           <label class="sr-only" for="email">Email address</label>
           <input id="email" type="email" placeholder="you@example.com" required />
-          <button class="btn btn--solid magnetic" type="submit"><span>Join the waitlist</span></button>
+          <button class="btn btn--solid" type="submit"><span>Join the waitlist</span></button>
         </form>
         <p class="cta__fine" data-reveal>No spam. One email when the silence breaks.</p>
       </div>
