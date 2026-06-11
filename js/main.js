@@ -1,5 +1,5 @@
 /* accessero — interactions
-   Parallax, split-text reveals, counters, magnetic buttons, nav.
+   Parallax, split-text reveals, counters, marquee fill, nav.
    No dependencies; everything degrades gracefully. */
 
 (() => {
@@ -187,6 +187,31 @@
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && menuOpen) setMenu(false);
   });
+
+  /* ---------- Marquee: clone the authored line until the loop can't gap ----------
+     The keyframe shifts one copy width per cycle, so the other (copies - 1)
+     spans must cover the viewport or a blank gap slides in before the wrap. */
+  const marqueeTrack = document.querySelector("[data-marquee]");
+  if (marqueeTrack) {
+    const fillMarquee = () => {
+      const spanW = marqueeTrack.firstElementChild.getBoundingClientRect().width;
+      if (!spanW) return;
+      const needed = Math.ceil(window.innerWidth / spanW) + 1;
+      while (marqueeTrack.children.length < needed) {
+        marqueeTrack.appendChild(marqueeTrack.firstElementChild.cloneNode(true));
+      }
+      marqueeTrack.style.setProperty("--marquee-copies", marqueeTrack.children.length);
+    };
+    fillMarquee();
+    document.fonts.ready.then(fillMarquee);
+    window.addEventListener("resize", fillMarquee);
+  }
+
+  /* ---------- Park ambient loops while their section is off-screen ---------- */
+  const offstageIO = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle("is-offstage", !e.isIntersecting));
+  });
+  document.querySelectorAll(".marquee, .cta").forEach((el) => offstageIO.observe(el));
 
   /* ---------- Scenes: list rows swap the section backdrop ---------- */
   const sceneRows = [...document.querySelectorAll("[data-scene]")];

@@ -10,6 +10,8 @@
   --white: #ffffff;
   --red: #ff2230;
   --red-deep: #b30b16;
+  --red-soft: #ffb0b5;   /* light tints of --red: keep in step if it changes */
+  --red-bright: #ff5a64;
   --grey: #9b9295;
   --grey-dark: #5d5557;
   --line: rgba(255, 255, 255, 0.1);
@@ -68,11 +70,15 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
   border-radius: 50%;
   border: 1px solid rgba(255, 34, 48, 0.35);
   box-shadow: 0 0 80px rgba(255, 34, 48, 0.25), inset 0 0 60px rgba(255, 34, 48, 0.12);
-  animation: loaderRing 1.8s var(--ease-in-out) infinite alternate;
+  animation: ringPulse 1.8s var(--ease-in-out) infinite alternate;
 }
-@keyframes loaderRing {
-  from { transform: translate(-50%, -50%) scale(0.92); opacity: 0.5; }
-  to   { transform: translate(-50%, -50%) scale(1.04); opacity: 1; }
+/* shared by the loader ring and its CTA echo; tune per element via the vars */
+@keyframes ringPulse {
+  from {
+    transform: translate(-50%, -50%) scale(var(--ring-from, 0.92));
+    opacity: var(--ring-min, 0.5);
+  }
+  to { transform: translate(-50%, -50%) scale(var(--ring-to, 1.04)); opacity: 1; }
 }
 .loader__word {
   display: flex;
@@ -232,6 +238,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .menu.is-open .menu__links a:nth-child(3) { transition-delay: 0.2s; }
 .menu.is-open .menu__links a:nth-child(4) { transition-delay: 0.26s; }
 .menu.is-open .menu__links a:nth-child(5) { transition-delay: 0.32s; }
+.menu.is-open .menu__links a:nth-child(6) { transition-delay: 0.38s; }
 .menu__foot {
   margin-top: 3rem;
   font-family: var(--font-serif); font-style: italic;
@@ -332,7 +339,7 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; }
 .hero__row > span { display: inline-block; }
 .hero__row--serif em {
   font-weight: 400; letter-spacing: -0.02em;
-  background: linear-gradient(100deg, var(--white) 35%, #ffb0b5 70%, #ff5a64);
+  background: linear-gradient(100deg, var(--white) 35%, var(--red-soft) 70%, var(--red-bright));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
 }
@@ -385,7 +392,13 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   text-transform: uppercase; color: var(--grey);
   animation: marquee 28s linear infinite;
 }
-@keyframes marquee { to { transform: translateX(-25%); } }
+/* shift exactly one copy per cycle; JS sets --marquee-copies as it clones */
+@keyframes marquee {
+  to { transform: translateX(calc(-100% / var(--marquee-copies, 2))); }
+}
+/* ambient loops cost compositor work even off-screen; JS parks them */
+.marquee.is-offstage .marquee__track,
+.cta.is-offstage::after { animation-play-state: paused; }
 
 /* ============ Craft ============ */
 .craft {
@@ -626,21 +639,19 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
   pointer-events: none;
 }
 /* eclipse echo — the loader ring returns behind the closing line.
-   Kept small enough that the glow never reaches the section's clip edge. */
+   The 50svh term keys the ring to viewport height as well as width, so the
+   glow stays inside the section's clip edge on short windows too. */
 .cta::after {
   content: ""; position: absolute; z-index: 1;
   top: 50%; left: 50%;
-  width: min(56vw, 520px); aspect-ratio: 1;
+  width: min(56vw, 50svh, 520px); aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   border: 1px solid rgba(255, 34, 48, 0.28);
   box-shadow: 0 0 60px rgba(255, 34, 48, 0.18), inset 0 0 60px rgba(255, 34, 48, 0.09);
   pointer-events: none;
-  animation: ctaPulse 3.4s var(--ease-in-out) infinite alternate;
-}
-@keyframes ctaPulse {
-  from { transform: translate(-50%, -50%) scale(0.97); opacity: 0.6; }
-  to   { transform: translate(-50%, -50%) scale(1.02); opacity: 1; }
+  --ring-from: 0.97; --ring-to: 1.02; --ring-min: 0.6; /* gentler than the loader */
+  animation: ringPulse 3.4s var(--ease-in-out) infinite alternate;
 }
 .cta__inner { position: relative; z-index: 2; }
 .cta__title {
@@ -720,9 +731,10 @@ body.is-loaded .hero__meta { transition-delay: 0.9s; }
 /* split text (JS wraps words) */
 [data-split] .w {
   display: inline-block; overflow: clip; vertical-align: top;
-  /* breathing room inside the clip box so descenders and italic
-     overhangs aren't sheared; negative margins cancel the layout shift */
-  padding: 0.14em 0.08em; margin: -0.14em -0.08em;
+  /* breathing room inside the clip box so descenders and italic overhangs
+     aren't sheared; negative margins cancel the layout shift. 0.14em per
+     side is what the Instrument Serif italics need (matches .hero__row). */
+  padding: 0.14em; margin: -0.14em;
 }
 [data-split] .w > i {
   display: inline-block; font-style: inherit;
