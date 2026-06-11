@@ -1,6 +1,6 @@
 # accessero
 
-**Power, perfected.** A cinematic single-page site for accessero, a fictional
+**Power, perfected.** A cinematic single-page site for accessero, a
 technology accessory company focused on charging products.
 
 Pure static HTML/CSS/JS — no build step, no dependencies.
