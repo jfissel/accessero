@@ -21,13 +21,13 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Deploy to GitHub Pages
+## Deploy
 
-1. Push to `main`.
-2. Repo **Settings → Pages → Source**: deploy from branch `main`, folder `/ (root)`.
+Hosted on **Cloudflare Pages** at [accessero.com](https://accessero.com).
+Pushing to `main` triggers a deploy automatically (no build step — the repo
+root is served as-is).
 
-All asset paths are relative, so the site works both at a custom domain and at
-`username.github.io/accessero/`.
+All asset paths are relative, so the site also works under a subpath.
 
 ## Notes
 
